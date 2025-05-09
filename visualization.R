@@ -63,11 +63,10 @@ zigoRMus5 <- read.markups.json("data/curves/Mus5_ZigoRight.json")
 
 ## Leemos las coordenadas de las superficies: 
 
-surfaceMus2 <-read.markups.json("data/surfaces/Mus2_S.json")
-surfaceMus3 <-read.markups.json("data/surfaces/Mus3_S.json")
-surfaceMus4 <-read.markups.json("data/surfaces/Mus4_S.json")
-surfaceMus5 <-read.markups.json("data/surfaces/Mus5_S.json")
-
+surfaceMus2 <- read.markups.json("data/surfaces/Mus2_S.json")
+surfaceMus3 <- read.markups.json("data/surfaces/Mus3_S.json")
+surfaceMus4 <- read.markups.json("data/surfaces/Mus4_S.json")
+surfaceMus5 <- read.markups.json("data/surfaces/Mus5_S.json")
 
 
 
@@ -77,13 +76,28 @@ surfaceMus5 <-read.markups.json("data/surfaces/Mus5_S.json")
 
 plotspec(
   spec = model_mus2,        # Malla 3D del modelo (mesh/shape)
-  digitspec = lmksMus2,     # Matriz con coordenadas de landmarks
-  fixed = 10,               # Numero de landmarks fijos
+  digitspec = zigoLMus2,     # Matriz con coordenadas de landmarks
+  fixed = 30,               # Numero de landmarks fijos
   fixed.pt.col = "green",   # Color landmarks fijos: verde
   fixed.pt.size = 10,       # Tamaño landmarks fijos: 10
   mesh.ptsize = 0.5,        # Tamaño puntos de la malla: 0.5 (pequeño)
-  centered = FALSE          # Los landmarks NO están centrados con la malla
-  )
+  centered = F         
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
