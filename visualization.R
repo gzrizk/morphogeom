@@ -5,21 +5,85 @@ library(Rvcg)
 library(rgl)
 library(abind)
 library(jsonlite)
+library(SlicerMorphR)
 
 
 # ----------------------------
 # CONFIGURACIÓN DE DIRECTORIOS
+
 # ----------------------------
-base_dir <- "C:/Users/Usuario/OneDrive/morphogeom/data"
-model_dir <- file.path(base_dir, "models")
-lm_dir <- file.path(base_dir, "landmarks")
-curve_dir <- file.path(base_dir, "semilandmarks")
-surface_dir <- file.path(base_dir, "superficies")
+# 1. Establecer directorio base 
+base_dir <- here("data")  # Ruta a "morphogeom/data"
+
+# 2. Construir subdirectorios
+model_dir <- here(base_dir, "models")
+lm_dir <- here(base_dir, "landmarks")
+curves_dir<- here(base_dir,"curves")
+suraces_dir<-here(base_dir,"surfaces")
 
 
-mesh <-ply2mesh("data/models/Mus1.ply")
+## Cargamos los modelos
 
-plot3d(mesh)
+model_mus2 <- ply2mesh("data/models/Mus2.ply")
+
+model_mus3 <- ply2mesh("data/models/Mus3.ply")
+
+model_mus4 <- ply2mesh("data/models/Mus4.ply")
+
+model_mus5 <- ply2mesh("data/models/Mus5.ply")
+
+## Ploteamos modelos con la funcion #plot3d
+
+plot3d(model_mus2) # Ejemplo
+
+## Leemos las coordenadas de los landmarks:
+
+lmksMus2 <- read.markups.json("data/landmarks/Mus2_LM.json")
+
+lmksMus3 <- read.markups.json("data/landmarks/Mus3_LM.json")
+
+lmksMus4 <- read.markups.json("data/landmarks/Mus4_LM.json")
+
+lmksMus5 <- read.markups.json("data/landmarks/Mus5_LM.json")
+
+## Leemos las coordenadas de las curvas:
+
+zigoLMus2 <- read.markups.json("data/curves/Mus2_ZigoLeft.json")
+zigoRMus2 <- read.markups.json("data/curves/Mus2_ZigoRight.json")
+
+zigoLMus3 <- read.markups.json("data/curves/Mus3_ZigoLeft.json")
+zigoRMus3 <- read.markups.json("data/curves/Mus3_ZigoRight.json")
+
+
+zigoLMus4 <- read.markups.json("data/curves/Mus4_ZigoLeft.json")
+zigoRMus4 <- read.markups.json("data/curves/Mus4_ZigoRight.json")
+
+zigoLMus5 <- read.markups.json("data/curves/Mus5_ZigoLeft.json")
+zigoRMus5 <- read.markups.json("data/curves/Mus5_ZigoRight.json")
+
+## Leemos las coordenadas de las superficies: 
+
+surfaceMus2 <-read.markups.json("data/surfaces/Mus2_S.json")
+surfaceMus3 <-read.markups.json("data/surfaces/Mus3_S.json")
+surfaceMus4 <-read.markups.json("data/surfaces/Mus4_S.json")
+surfaceMus5 <-read.markups.json("data/surfaces/Mus5_S.json")
+
+
+
+
+
+
+#Plotear un especimen
+
+plotspec(
+  spec = model_mus2,        # Malla 3D del modelo (mesh/shape)
+  digitspec = lmksMus2,     # Matriz con coordenadas de landmarks
+  fixed = 10,               # Numero de landmarks fijos
+  fixed.pt.col = "green",   # Color landmarks fijos: verde
+  fixed.pt.size = 10,       # Tamaño landmarks fijos: 10
+  mesh.ptsize = 0.5,        # Tamaño puntos de la malla: 0.5 (pequeño)
+  centered = FALSE          # Los landmarks NO están centrados con la malla
+  )
 
 
 
