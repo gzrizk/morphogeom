@@ -15,6 +15,11 @@ curva1 <- 11:30
 curva2 <- 31:70
 curvas <- list(curva1, curva2)
 
+#REVISAR ESTO
+#A vector (or if threre are several curves) a list of vectors (containing the rowindices) of the (Semi-)landmarks forming the curve(s) in the successive position on the curve - including the beginning and end points, that are not allowed to slide.
+
+#slider3d(datarray= dataset , fixes curve etc etc )
+
 
 # Realizar Procrustes + deslizamiento (usando bending energy)
 procrustes_BE <- procSym(
@@ -48,6 +53,10 @@ shape_coords_BE <- procrustes_BE$orpdata ## Coordenadas de forma
 
 meanshape_BE <- procrustes_BE$mshape #Forma consenso BE
 
+
+## GUARDAR FORMA CONSENSO EN TPS ES UTIL PARA VISUALIZAR CIERTAS COSAS...
+
+writeland.tps(meanshape_BE, "formaconsenso.tps")
 
 ## Resultados Proc Distances
 
@@ -181,6 +190,23 @@ plot3d(x4PD,y4PD,z4PD, col = "black", size = 1, type = "s")
 
 plot3d(x4MD3, yMD3, zMD3, col = "blue", size = 1, type = "s")
 
+
+
+## REVISAR ESTO 
+
+shade3d(mono, col = "lightgray") # Plotear especimen
+spheres3d(lands_missing[1:34,,1], col = "red", radius = 1) # Dataset incompleto
+spheres3d(lands[c(1,4,8,10,15),,1], col = "blue", radius = 1) # Ver los que borramos
+
+
+
+
+
+
+
+
+
+
 ###############################################################
 ### Estimamos missing data usando geomorph "Reg" ##############
 
@@ -199,6 +225,25 @@ estimate.missing(dataset_missing4, method = "Reg")
 
 # Tampoco pude con un solo NA
 
+
+
+
+
+### ESTO PUEDE SERVIR NO SE PORQUE 
+
+# Extraigo los PCs
+# PCs1 <- proc1$PCsscore_sym
+# head(PCs1)
+# 
+# # Plotear los PCs
+# plot(proc1$PCsscore_sym)
+# text(proc1$PCsscore_sym, labels = rownames(PCs1))
+# 
+# plot(proc1$PCsscore_sym[,3], proc1$PCsscore_sym[,4])
+# 
+# # GRAFICAR CAMBIO EN FORMA EN LOS PCs
+# alo <- ply2mesh("Callicebus personatus - M - MN30181.ply")
+# plot3d(alo, aspect = F)
 
 
 
